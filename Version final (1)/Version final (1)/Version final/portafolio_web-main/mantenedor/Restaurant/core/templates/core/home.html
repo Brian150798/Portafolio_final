@@ -1,0 +1,57 @@
+{% extends "core/base.html" %}
+{% load static %}
+
+{% block titulo %}
+<title>Gestión de Platos</title>
+<link rel="stylesheet" href="{% static 'core/css/home.css' %}">
+{% endblock %}
+{% block content %}
+
+<div class="container-fluid">
+  <div class="table table-bordered" id="estiloTabla">
+    <div>
+      <center>
+        <h1 style="background-color: rgba(69, 62, 62, 0.421); color: white;">Gestión de mis platos</h1>
+      </center>
+    </div>
+    <table class="table" id="estilo">
+      <thead>
+        <tr>
+          <div class="row">
+            <th class="col-xs-3" scope="col">#1</th>
+            <th class="col-xs-3" scope="col">Nombre</th>
+            <th class="col-xs-3" scope="col">Valor</th>
+            <th class="col-xs-3" scope="col">Categoria</th>
+            <th class="col-xs-12" scope="col">Opciones</th>
+
+          </div>
+        </tr>
+      </thead>
+      <tbody>
+
+
+
+
+        {% for plato in platos %}
+        <tr>
+          <th class="col-xs-3" scope="row">{{plato.idPlato}}</th>
+          <td class="col-xs-3">{{plato.nombrePlato}} </td>
+          <td class="col-xs-3">$ {{plato.valorPlato}}</td>
+          <td class="col-xs-3">{{plato.categoria}}</td>
+          <td class="col-xs-6"> <a href="{% url 'form_mod_plato' plato.idPlato %}" class="btn btn-warning">Modificar</a>
+          </td>
+          <td class="col-xs-6"> <a href="{% url 'form_del_plato' plato.idPlato %}" class="btn btn-danger">Eliminar</a>
+          </td>
+        </tr>
+        {% endfor %}
+
+      </tbody>
+    </table>
+  </div>
+
+  <a href="{% url 'form_plato' %}" class="btn btn-secondary">Agregar Plato</a>
+  <a href="{% url 'receta' %}" class="btn btn-secondary">Ver recetas</a>
+</div>
+
+
+{% endblock %}
